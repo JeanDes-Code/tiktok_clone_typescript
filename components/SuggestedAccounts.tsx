@@ -11,11 +11,10 @@ interface IProps {
 }
 
 const SuggestedAccounts = () => {
-  const { userProfile, fetchAllUsers, allUsers } = useAuthStore()
+  const { fetchAllUsers, allUsers } = useAuthStore()
   const users = allUsers
     .sort(() => 0.5 - Math.random())
     .slice(0, allUsers.length)
-    .filter((user: IUser) => user._id !== userProfile._id)
 
   useEffect(() => {
     fetchAllUsers()
