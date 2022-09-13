@@ -5,7 +5,7 @@ import {
   singleUserQuery,
   userCreatedPostsQuery,
   userLikedPostsQuery,
-} from 'utils/queries'
+} from '../../../utils/queries'
 
 export default async function handler(
   req: NextApiRequest,
