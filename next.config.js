@@ -6,16 +6,19 @@ const nextConfig = {
   reactStrictMode: true,
   swcMinify: true,
   images: {
-    domains: ['i.la-croix.com', 'lh3.googleusercontent.com'],
+    domains: ['i.la-croix.com', 'lh3.googleusercontent.com', 'cdn.sanity.io'],
   },
-}
-const STUDIO_REWRITE = {
-  source: '/studio/(.*)',
-  destination: `${process.env.NEXT_PUBLIC_BASE_URL}/studio`,
-}
-
-module.exports = {
-  rewrites: () => [STUDIO_REWRITE],
+  async rewrites() {
+    return [
+      {
+        source: '/studio/:path*',
+        destination:
+          process.env.NODE_ENV === 'development'
+            ? 'http://localhost:3333/studio/:path*'
+            : '/studio/index.html',
+      },
+    ]
+  },
 }
 
 module.exports = nextConfig

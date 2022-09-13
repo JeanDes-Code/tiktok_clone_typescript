@@ -3,6 +3,7 @@
   "project": {
     "name": "sanity_backend"
   },
+  "basePath": "/studio",
   "api": {
     "projectId": "tupgnsyw",
     "dataset": "production"
