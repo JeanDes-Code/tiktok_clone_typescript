@@ -22,7 +22,7 @@ const Home = ({ videos }: IProps) => {
         />
       </Head>
       <div className="flex flex-col gap-10 videos h-full">
-        {videos.length ? (
+        {videos?.length ? (
           videos.map((video: Video) => (
             <VideoCard post={video} key={video._id} />
           ))
