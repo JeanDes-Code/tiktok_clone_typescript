@@ -30,10 +30,10 @@ const Detail = ({ postDetails }: IProps) => {
 
   const onVideoClick = () => {
     if (playing) {
-      videoRef?.current.pause()
+      videoRef?.current?.pause()
       setPlaying(false)
     } else {
-      videoRef?.current.play()
+      videoRef?.current?.play()
       setPlaying(true)
     }
   }
@@ -55,7 +55,7 @@ const Detail = ({ postDetails }: IProps) => {
     }
   }
 
-  const addComment = async (e) => {
+  const addComment = async (e: { preventDefault: () => void }) => {
     e.preventDefault()
 
     if (userProfile && comment) {

@@ -5,11 +5,11 @@ import axios from 'axios'
 import Link from 'next/link'
 import { useRouter } from 'next/router'
 
-import VideoCard from 'components/VideoCard'
-import NoResults from 'components/NoResults'
+import VideoCard from '../../components/VideoCard'
+import NoResults from '../../components/NoResults'
 import { IUser, Video } from '../../types'
 import { BASE_URL } from './../../utils/index'
-import useAuthStore from 'store/authStore'
+import useAuthStore from '../../store/authStore'
 import Head from 'next/head'
 
 const Search = ({ videos }: { videos: Video[] }) => {

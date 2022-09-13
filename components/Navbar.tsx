@@ -8,12 +8,14 @@ import { IoMdAdd } from 'react-icons/io'
 import { GoogleLogin, googleLogout } from '@react-oauth/google'
 
 import Logo from '../utils/typetok-logo.png'
+import { IUser } from '../types'
 import { createOrGetUser } from './../utils/index'
-import useAuthStore from 'store/authStore'
+import useAuthStore from '../store/authStore'
 
 const Navbar = () => {
   const { userProfile, addUser, removeUser } = useAuthStore()
   const [searchValue, setSearchValue] = useState('')
+  const [user, setUser] = useState<IUser | null>()
   const router = useRouter()
 
   const handleSearch = (e: { preventDefault: () => void }) => {
@@ -23,6 +25,10 @@ const Navbar = () => {
       router.push(`/search/${searchValue}`)
     }
   }
+
+  useEffect(() => {
+    setUser(userProfile)
+  }, [userProfile])
 
   return (
     <div className="w-full flex justify-between items-center border-b-2 border-gray-200 py-2 px-4">
@@ -59,7 +65,7 @@ const Navbar = () => {
       </div>
 
       <div>
-        {userProfile ? (
+        {user ? (
           <div className="flex gap-5 md:gap-10">
             <Link href="/upload">
               <button className="border-2 px-2 md:px-4 text-md font-semibold flex items-center gap-2">
@@ -67,14 +73,14 @@ const Navbar = () => {
                 <span className="hidden md:block">Publier</span>
               </button>
             </Link>
-            {userProfile.image && (
+            {user.image && (
               <Link href="/profile">
                 <>
                   <Image
                     width={40}
                     height={40}
                     className="rounded-full cursor-pointer"
-                    src={userProfile.image}
+                    src={user.image}
                     alt="profile pic"
                   />
                 </>
