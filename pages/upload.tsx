@@ -10,6 +10,7 @@ import { SanityAssetDocument } from '@sanity/client'
 
 import { topics } from 'utils/constants'
 import { BASE_URL } from './../utils/index'
+import Head from 'next/head'
 
 const Upload = () => {
   const [isLoading, setIsLoading] = useState(false)
@@ -75,110 +76,119 @@ const Upload = () => {
   }
 
   return (
-    <div className="flex w-full h-full position:absolute left-0 top-[60px] mb-10 t-10 lg:pt-20 bg-[#f8f8f8] justify-center">
-      <div className="bg-white rounded-lg xl:h-[80vh] w-[60%] flex gap-6 flex-wrap justify-between items-center p-14 pt-6">
-        <div>
+    <>
+      <Head>
+        <title>TypeTock - Publier</title>
+        <meta
+          name="description"
+          content="Une application Next.js + Typescript, clone de tiktok."
+        />
+      </Head>
+      <div className="flex w-full h-full position:absolute left-0 top-[60px] mb-10 t-10 lg:pt-20 bg-[#f8f8f8] justify-center">
+        <div className="bg-white rounded-lg xl:h-[80vh] w-[60%] flex gap-6 flex-wrap justify-between items-center p-14 pt-6">
           <div>
-            <p className="text-2xl font-bold">Publier une vidéo</p>
-            <p className="text-md text-gray-400 mt-1">
-              Publie une vidéo sur ton profil
-            </p>
-          </div>
-          <div className="border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-10 w-[260px] h-[460px] p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100">
-            {isLoading ? (
-              <p>Chargement...</p>
-            ) : (
-              <div>
-                {videoAsset ? (
-                  <div>
-                    <video
-                      src={videoAsset.url}
-                      loop
-                      controls
-                      className="rounded-xl h-[450px] mt-16 bg-black"
-                    ></video>
-                  </div>
-                ) : (
-                  <label className="cursor-pointer">
-                    <div className="flex flex-col items-center justify-center h-full">
-                      <div className="flex flex-col items-center justify-center">
-                        <p className="font-bold text-xl">
-                          <FaCloudUploadAlt className="text-gray-300 text-6xl" />
+            <div>
+              <p className="text-2xl font-bold">Publier une vidéo</p>
+              <p className="text-md text-gray-400 mt-1">
+                Publie une vidéo sur ton profil
+              </p>
+            </div>
+            <div className="border-dashed rounded-xl border-4 border-gray-200 flex flex-col justify-center items-center outline-none mt-10 w-[260px] h-[460px] p-10 cursor-pointer hover:border-red-300 hover:bg-gray-100">
+              {isLoading ? (
+                <p>Chargement...</p>
+              ) : (
+                <div>
+                  {videoAsset ? (
+                    <div>
+                      <video
+                        src={videoAsset.url}
+                        loop
+                        controls
+                        className="rounded-xl h-[450px] mt-16 bg-black"
+                      ></video>
+                    </div>
+                  ) : (
+                    <label className="cursor-pointer">
+                      <div className="flex flex-col items-center justify-center h-full">
+                        <div className="flex flex-col items-center justify-center">
+                          <p className="font-bold text-xl">
+                            <FaCloudUploadAlt className="text-gray-300 text-6xl" />
+                          </p>
+                          <p className="text-xl font-semibold">
+                            Publier une vidéo
+                          </p>
+                        </div>
+                        <p className="text-gray-400 text-center mt-10 text-sm leading-10">
+                          MP4 ou WebM ou ogg <br /> 720px1280 ou plus <br />
+                          10 minutes maximum <br />
+                          2GB maximum{' '}
                         </p>
-                        <p className="text-xl font-semibold">
-                          Publier une vidéo
+                        <p className="bg-[#f51997] text-center mt-10 rounded text-white text-md font-medium p-2 w-52 outline-none">
+                          Choisir un fichier
                         </p>
                       </div>
-                      <p className="text-gray-400 text-center mt-10 text-sm leading-10">
-                        MP4 ou WebM ou ogg <br /> 720px1280 ou plus <br />
-                        10 minutes maximum <br />
-                        2GB maximum{' '}
-                      </p>
-                      <p className="bg-[#f51997] text-center mt-10 rounded text-white text-md font-medium p-2 w-52 outline-none">
-                        Choisir un fichier
-                      </p>
-                    </div>
-                    <input
-                      type="file"
-                      name="upload-video"
-                      onChange={uploadVideo}
-                      className="w-0 h-0"
-                    />
-                  </label>
-                )}
-              </div>
-            )}
-            {wrongFileType && (
-              <p className="text-center text-xl text-red-400 font-semibold mt-4 [w-250px]">
-                Please select a video file
-              </p>
-            )}
+                      <input
+                        type="file"
+                        name="upload-video"
+                        onChange={uploadVideo}
+                        className="w-0 h-0"
+                      />
+                    </label>
+                  )}
+                </div>
+              )}
+              {wrongFileType && (
+                <p className="text-center text-xl text-red-400 font-semibold mt-4 [w-250px]">
+                  Please select a video file
+                </p>
+              )}
+            </div>
           </div>
-        </div>
-        <div className="flex flex-col gap-3 pb-10">
-          <label className="text-md font-medium">Message</label>
-          <input
-            className="rounded outline-none text-md border-2 border-gray-200 p-2"
-            type="text"
-            value={caption}
-            onChange={(e) => setCaption(e.target.value)}
-          />
-          <label className="text-md font-medium">Choisir une catégorie</label>
-          <select
-            className="outline-none border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
-            onChange={(e) => setCategory(e.target.value)}
-          >
-            {topics.map((topic) => (
-              <option
-                key={topic.name}
-                className="outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300"
-                value={topic.name}
+          <div className="flex flex-col gap-3 pb-10">
+            <label className="text-md font-medium">Message</label>
+            <input
+              className="rounded outline-none text-md border-2 border-gray-200 p-2"
+              type="text"
+              value={caption}
+              onChange={(e) => setCaption(e.target.value)}
+            />
+            <label className="text-md font-medium">Choisir une catégorie</label>
+            <select
+              className="outline-none border-2 border-gray-200 text-md capitalize lg:p-4 p-2 rounded cursor-pointer"
+              onChange={(e) => setCategory(e.target.value)}
+            >
+              {topics.map((topic) => (
+                <option
+                  key={topic.name}
+                  className="outline-none capitalize bg-white text-gray-700 text-md p-2 hover:bg-slate-300"
+                  value={topic.name}
+                >
+                  {topic.name}
+                </option>
+              ))}
+            </select>
+            <div className="flex gap-6 mt-10">
+              <button
+                onClick={() => {}}
+                type="button"
+                className="border-gray-300 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
               >
-                {topic.name}
-              </option>
-            ))}
-          </select>
-          <div className="flex gap-6 mt-10">
-            <button
-              onClick={() => {}}
-              type="button"
-              className="border-gray-300 border-2 text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
-            >
-              {' '}
-              Annuler
-            </button>
-            <button
-              onClick={handlePost}
-              type="button"
-              className="bg-[#f51997] text-white text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
-            >
-              {' '}
-              Publier
-            </button>
+                {' '}
+                Annuler
+              </button>
+              <button
+                onClick={handlePost}
+                type="button"
+                className="bg-[#f51997] text-white text-md font-medium p-2 rounded w-28 lg:w-44 outline-none"
+              >
+                {' '}
+                Publier
+              </button>
+            </div>
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
 
