@@ -9,5 +9,13 @@ const nextConfig = {
     domains: ['i.la-croix.com', 'lh3.googleusercontent.com'],
   },
 }
+const STUDIO_REWRITE = {
+  source: '/studio/:path*',
+  destination: process.env.NEXT_PUBLIC_BASE_URL,
+}
+
+module.exports = {
+  rewrites: () => [STUDIO_REWRITE],
+}
 
 module.exports = nextConfig
