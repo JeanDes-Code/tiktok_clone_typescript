@@ -8,7 +8,7 @@ import useAuthStore from '../store/authStore'
 import { client } from '../utils/client'
 import { SanityAssetDocument } from '@sanity/client'
 
-import { topics } from 'utils/constants'
+import { topics } from '../utils/constants'
 import { BASE_URL } from './../utils/index'
 import Head from 'next/head'
 
