@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react'
 import { GoogleOAuthProvider } from '@react-oauth/google'
 
 import Sidebar from './../components/Sidebar'
-import Navbar from 'components/Navbar'
+import Navbar from '../components/Navbar'
 import '../styles/globals.css'
 import Head from 'next/head'
 
