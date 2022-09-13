@@ -10,8 +10,8 @@ const nextConfig = {
   },
 }
 const STUDIO_REWRITE = {
-  source: '/studio/:path*',
-  destination: process.env.NEXT_PUBLIC_BASE_URL,
+  source: '/studio/(.*)',
+  destination: `${process.env.NEXT_PUBLIC_BASE_URL}/studio`,
 }
 
 module.exports = {
