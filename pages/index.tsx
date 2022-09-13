@@ -15,7 +15,7 @@ const Home = ({ videos }: IProps) => {
   return (
     <>
       <Head>
-        <title>TypeTock - Partage de vidéos</title>
+        <title>TypeTock</title>
         <meta
           name="description"
           content="Une application Next.js + Typescript, clone de tiktok."
